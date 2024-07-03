@@ -172,9 +172,9 @@ const BoxComponent = () => {
       </div>
       {selectedBox && (
         <div className="winner-box">
-          <p>Winner:</p>
+          <p>Prize:</p>
           <div
-            className="box winner"
+            className="size-[10rem]"
             style={{
               backgroundImage: `url(${
                 boxes.find((box) => box.id === parseInt(selectedBox)).imageUrl
