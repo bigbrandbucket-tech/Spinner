@@ -7,8 +7,7 @@ function App() {
         <div
           className="font-semibold text-[1.4rem] p-2 pb-3"
           style={{
-            borderTop: "1px solid white",
-            borderBottom: "1px solid white",
+            boxShadow: "0px 2px 4px rgba(255, 255, 255, 0.7)", // Adjust shadow parameters as needed
           }}
         >
           HyperLoot
