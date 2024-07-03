@@ -26,10 +26,8 @@
 }
 
 .winner {
-  border: 2px solid white;
-  /* transform: scale(1.1); */
+  box-shadow: 0 0 15px 3px rgba(255, 255, 255, 1); /* Adjust shadow parameters as needed */
 }
-
 .center-line {
   position: absolute;
   top: 0;
