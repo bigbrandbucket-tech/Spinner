@@ -3,7 +3,9 @@ import SpinningBlocks from "./components/Spinner";
 function App() {
   return (
     <div>
-      <h1>HELLO</h1>
+      <div className="text-center">
+        <div className="font-semibold text-[1.4rem]">HyperLoot</div>
+      </div>
       <SpinningBlocks />
     </div>
   );

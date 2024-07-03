@@ -9,21 +9,25 @@
 .box-container {
   position: relative; /* Needed for positioning the center line */
   display: flex;
-  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-x: hidden; /* Enable horizontal scrolling */
   overflow-y: hidden; /* Hide vertical scrollbar */
   width: 100%; /* Ensure the container takes full width */
-  padding: 10px; /* Adjust padding as needed */
+  margin: 3rem 0;
+  max-width: 730px;
+  box-shadow: 12px 0px 12px -6px rgba(255, 255, 255, 0.7),
+    -12px 0px 12px -6px rgba(255, 255, 255, 0.7);
 }
 
 .box {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   flex-shrink: 0; /* Prevent boxes from shrinking if needed */
   transition: transform 0.3s ease; /* Example transition for visual effect */
 }
 
 .winner {
-  transform: scale(1.1); /* Example scale transformation for visual effect */
+  border: 2px solid white;
+  /* transform: scale(1.1); */
 }
 
 .center-line {

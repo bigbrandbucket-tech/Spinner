@@ -27,15 +27,29 @@ const BoxComponent = () => {
   }, []);
 
   const getRandomDuration = () => {
-    // Generate a random duration between 2000ms (2 seconds) and 4000ms (4 seconds)
-    return Math.random() * (4000 - 2000) + 2000;
+    // Generate a random duration between 3000ms (3 seconds) and 5000ms (5 seconds)
+    return Math.random() * (5000 - 3000) + 3000;
+  };
+
+  const handleResetScroll = () => {
+    if (boxContainerRef.current) {
+      boxContainerRef.current.scrollTo({
+        left: 0,
+        // behavior: "smooth",
+      });
+      setScrollLeft(0);
+      setSelectedBox(null);
+    }
   };
 
   const handleStartScroll = () => {
+    setSelectedBox(null);
+
     if (!isScrolling) {
       setIsScrolling(true);
+      handleResetScroll();
       const duration = getRandomDuration(); // Duration of the scroll in milliseconds
-      const maxSpeed = 20; // Maximum speed of the scroll
+      const maxSpeed = 30; // Maximum speed of the scroll
       const halfDuration = duration / 2;
 
       if (boxContainerRef.current) {
@@ -53,11 +67,17 @@ const BoxComponent = () => {
             }
 
             boxContainerRef.current.scrollLeft += progress;
-            setScrollLeft(boxContainerRef.current.scrollLeft);
             requestAnimationFrame(scroll);
           } else {
             setIsScrolling(false);
             chooseWinner();
+            // Stop the smooth scrolling effect
+            if (boxContainerRef.current) {
+              boxContainerRef.current.scrollTo({
+                left: boxContainerRef.current.scrollLeft,
+                behavior: "smooth",
+              });
+            }
           }
         };
 
@@ -87,28 +107,37 @@ const BoxComponent = () => {
     }
   };
 
-  const handleResetScroll = () => {
-    if (boxContainerRef.current) {
-      boxContainerRef.current.scrollTo({
-        left: 0,
-        behavior: "smooth",
-      });
-      setScrollLeft(0);
-      setSelectedBox(null);
-    }
-  };
-
   const boxes = [
-    { id: 1, color: "#FF6633" },
-    { id: 2, color: "#FFB399" },
-    { id: 3, color: "#FF33FF" },
-    { id: 4, color: "#FFFF99" },
-    { id: 5, color: "#00B3E6" },
-    { id: 6, color: "#E6B333" },
-    { id: 7, color: "#3366E6" },
-    { id: 8, color: "#999966" },
-    { id: 9, color: "#99FF99" },
-    { id: 10, color: "#B34D4D" },
+    {
+      id: 1,
+      imageUrl:
+        "https://vipuljadaun.github.io/Task/0ccfafdb-bc51-46b9-96a1-d4046bb86a99.webp",
+    },
+    {
+      id: 2,
+      imageUrl:
+        "https://vipuljadaun.github.io/Task/f3163799-3fae-48e7-a2b7-b56e215d931f.webp",
+    },
+    {
+      id: 3,
+      imageUrl:
+        "https://vipuljadaun.github.io/Task/76881e55-1eae-450e-9a99-25e4840efbaa.webp",
+    },
+    {
+      id: 4,
+      imageUrl:
+        "https://vipuljadaun.github.io/Task/e060f9aa-a3cf-4b75-9c9c-81caa5920372.webp",
+    },
+    {
+      id: 5,
+      imageUrl:
+        "https://vipuljadaun.github.io/Task/668f5934-d1db-4804-86fc-c597b0346195.webp",
+    },
+    {
+      id: 6,
+      imageUrl:
+        "https://vipuljadaun.github.io/Task/a137dc12-4e83-416f-8abd-791535720e52.webp",
+    },
   ];
 
   const repeatedBoxes = Array.from({ length: 10 }).flatMap(() => boxes);
@@ -125,7 +154,12 @@ const BoxComponent = () => {
           <div
             key={`${box.id}-${Math.random()}`}
             className={`box ${selectedBox === `${box.id}` ? "winner" : ""}`}
-            style={{ backgroundColor: box.color }}
+            style={{
+              backgroundImage: `url(${box.imageUrl})`,
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
             data-id={box.id}
           ></div>
         ))}
@@ -133,10 +167,7 @@ const BoxComponent = () => {
 
       <div className="button-container">
         <button className="start-button" onClick={handleStartScroll}>
-          Start Scrolling
-        </button>
-        <button className="reset-button" onClick={handleResetScroll}>
-          Reset Scroll
+          Spin the wheel
         </button>
       </div>
       {selectedBox && (
@@ -145,9 +176,12 @@ const BoxComponent = () => {
           <div
             className="box winner"
             style={{
-              backgroundColor: boxes.find(
-                (box) => box.id === parseInt(selectedBox)
-              ).color,
+              backgroundImage: `url(${
+                boxes.find((box) => box.id === parseInt(selectedBox)).imageUrl
+              })`,
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
             }}
           ></div>
         </div>
